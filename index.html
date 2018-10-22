@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Header -->
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+  </head>
+
+<!-- Style -->
+  <style>
+    html,body {
+      font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+      font-size: 16px;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    webview, .webview {
+      height: 100%;
+      width: 90%;
+      margin: 0;
+      margin-left: 10%;
+    }
+    webview.hide {
+      flex: 0 1;
+      width: 0px;
+      height: 0px;
+    }
+
+    .loader {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: rgba(0, 0, 0, 0.7);
+    }
+    .loader-hide {
+      display: none;
+    }
+
+    /* Sidenav */
+
+    .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 10%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+  </style>
+
+<!-- Body -->
+  <body>
+    <!-- <div id="myTopnav" class="topnav"></div> -->
+
+    <div id="mySidenav" class="sidenav">
+      <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+      <a class="link" data-link="my.hofstra.edu" href="#">Webview One</a>
+      <a class="link" data-link="outlook.office.com" href="#">Webview Two</a>
+      <a class="link" data-link="inbox.google.com" href="#">Webview Three</a>
+      <a class="link" href="#">Webview Four</a>
+      <a class="link" href="#">Webview Five</a>
+    </div>
+
+    <span onclick="openNav()">open</span>
+
+    <div class="loader">
+      <h1>LOADING...</h1>
+    </div>
+
+    <webview class="webview hide" data-link="webview1" preload="./preload.js" src="http://my.hofstra.edu"></webview>
+    
+    <script> require('./renderer') </script>
+    <script> require('./hybrid-renderer') </script>
+    <script>
+        // $('.webview').hide();
+        // $('.webview[data-link=webview1]').show();
+
+        $(document).on('click','.link',function(){
+          $('.webview').attr('src','https://'+$(this).data('link')+'/');
+        });
+      
+    </script>
+  </body>
+</html>
